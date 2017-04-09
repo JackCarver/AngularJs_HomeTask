@@ -1,0 +1,49 @@
+<div class="panel">
+    <form novalidate name="newTask">
+        <div class="form-group">
+            
+            <div class="input-group">
+                <div>
+                    <label for="action">Action:</label>
+                    <input
+                        id="action" name="action"
+                        class="form-control"
+                        ng-model="$ctrl.newItem.action" />
+                </div>
+                
+                <div>
+                    <label  for="deadline">Deadline:</label>
+                    <input
+                        type="date"
+                        id="deadline" name="deadline"
+                        class="form-control"
+                        ng-model="$ctrl.newItem.deadline " />
+                </div>
+                
+                <div>
+                    <label  for="responsible">Responsible:</label>
+                    <input
+                        id="responsible" name="responsible"
+                        class="form-control"
+                        ng-model="$ctrl.newItem.responsible" />
+                </div>
+
+                <div>
+                    <label  for="estimation">Estimation:</label>
+                    <input
+                        type="number" min="1"
+                        id="estimation" name="estimation"
+                        class="form-control"
+                        ng-model="$ctrl.newItem.estimation" />
+                </div>
+
+                <span class="input-group-btn">
+                    <button
+                        class="btn btn-primary"
+                        ng-click="$ctrl.addNewItem($ctrl.todo.items, $ctrl.newItem)"
+                        ng-disabled="!($ctrl.isItemValid($ctrl.newItem))">Add</button>
+                </span>
+            </div>
+        </div>
+    </form>
+</div>

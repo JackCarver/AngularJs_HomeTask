@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-controller="Todo as $ctrl">
+<head>
+    <meta charset="utf-8">
+    <title>{{::$ctrl.todo.user}}'s TO DO List</title>
+    <link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/ng-cloak.css" rel="stylesheet">
+</head>
+<body ng-cloak>
+    <div class="container">
+        <div class="page-header">
+            <h1>
+                <img class="photo" ng-src="{{$ctrl.todo.userPhoto}}">
+                {{::$ctrl.todo.user}}'s To Do List
+                <span class="label label-default"
+                     ng-hide="$ctrl.incompleteCount($ctrl.todo.items) === 0"
+                     ng-class="$ctrl.warningLevel($ctrl.todo.items)">
+                    {{$ctrl.incompleteCount($ctrl.todo.items)}}
+                </span>
+            </h1>
+        </div>
+        
+        <task-input-panel></task-input-panel>
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> To Do List
+            </div>
+            <div class="panel-body">
+                
+                <vi-task-list></vi-task-list>
+
+                <label>
+                    <input type="checkbox" ng-model="$ctrl.showComplete" >Show Complete
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!--<p ng-bind="$ctrl.myName"></p>
+    <p ng-bind-template="{{$ctrl.myName}} - {{$ctrl.myName}}"></p>
+    <p ng-bind-html="$ctrl.myHTML"></p>
+    <p ng-non-bindable>{{1+2}}</p>-->
+
+    <script src="vendor/angular/angular.min.js"></script>
+    <script src="vendor/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="app.module.js"></script>
+    <script src="app.run.js"></script>
+    <script src="services/model.service.js"></script>
+    <script src="services/todo.service.js"></script>
+    <script src="controllers/todo.controller.js"></script>
+    <script src="filters/checkedItems.filter.js"></script>
+    <script src="directives/task-list/task-list.directive.js"></script>
+    <script src="directives/task-input-panel/task-input-panel.directive.js"></script>
+
+</body>
+</html>
