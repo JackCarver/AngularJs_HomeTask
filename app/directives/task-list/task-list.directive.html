@@ -1,18 +1,37 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Description</th>
-            <th>Checkbox</th>
-            <th>Done</th>
-            <th>Deadline</th>
-            <th>Responsible</th>
-            <th>Est. Hours</th>
+            <th>
+                <a href="#" ng-click="sortType = 'action'; sortReverse = !sortReverse">Description</a>
+            </th>
+
+            <th>
+                <input type="checkbox" ng-model="isCheckAll" ng-change="$ctrl.checkStatus($ctrl.todo.items, isCheckAll)">
+                Checkbox
+            </th>
+
+            <th>
+                <a href="#" ng-click="sortType = 'done'; sortReverse = !sortReverse">Done</a>
+            </th>
+
+            <th>
+                <a href="#" ng-click="sortType = 'deadline'; sortReverse = !sortReverse">Deadline</a>
+            </th>
+
+            <th>
+                <a href="#" ng-click="sortType = 'responsible'; sortReverse = !sortReverse">Responsible</a>
+            </th> 
+
+            <th>
+                <a href="#" ng-click="sortType = 'estimation'; sortReverse = !sortReverse">Est. Hours</a>
+            </th>
             <th class="text-right">Commands</th>
         </tr>
     </thead>
     <tbody>
         <!--<tr ng-repeat="item in $ctrl.todo.items | filter: {done: false} | orderBy: ['action']">-->
-        <tr ng-repeat="item in $ctrl.todo.items | checkedItems: $ctrl.showComplete | orderBy: ['action']">
+        <tr ng-repeat="item in $ctrl.todo.items | checkedItems: $ctrl.showComplete | orderBy: sortType: sortReverse"
+            ng-style="$ctrl.missedDeadline(item)">
             <td>{{item.action}}</td>
             <td><input type="checkbox" ng-model="item.done"></td>
             <td>{{item.done ? 'Yes' : 'No'}}</td>
@@ -20,12 +39,13 @@
             <td>{{item.responsible}}</td>
             <td>{{item.estimation}}</td>
             <td class="text-right">
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary"
+                    ng-click="$ctrl.setEditItem(item, $ctrl)">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit"></span>
                 </button>
                 <button
                     class="btn btn-primary btn-danger glyphicon glyphicon-trash" aria-hidden="true"
-                    ng-click="$ctrl.removeItem($ctrl.todo.items, item)"/></button>
+                    ng-click="$ctrl.removeItem($ctrl.todo.items, item)"/>
             </td>
         </tr>
     </tbody>

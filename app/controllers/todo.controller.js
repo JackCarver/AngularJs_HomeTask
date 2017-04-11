@@ -12,12 +12,12 @@
         $ctrl.myName = 'Vitaliy';
         $ctrl.myHTML = '<span>Vitaliy</span>';
         $ctrl.showComplete = true;
-
+        
         // $ctrl.incompleteCount = todoService.incompleteCount;
         // $ctrl.warningLevel = todoService.warningLevel;
         Object.assign($ctrl, todoService);
 
-        console.log($ctrl.todo);
+        //console.log($ctrl.todo);
 
 
     }

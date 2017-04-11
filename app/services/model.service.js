@@ -13,4 +13,9 @@
             // ]
         });
 
+    angular.module('app')
+        .value('isEditModeOn', false)
+        .value('sortType', 'action')
+        .value('sortReverse', false);
+
 })();

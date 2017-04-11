@@ -40,8 +40,10 @@
                 <span class="input-group-btn">
                     <button
                         class="btn btn-primary"
-                        ng-click="$ctrl.addNewItem($ctrl.todo.items, $ctrl.newItem)"
-                        ng-disabled="!($ctrl.isItemValid($ctrl.newItem))">Add</button>
+                        ng-click="$ctrl.addNewItem($ctrl.todo.items, $ctrl.newItem, $ctrl.tempEditItem)"
+                        ng-disabled="!($ctrl.isItemValid($ctrl.newItem))">
+                        {{$ctrl.SaveEditButtonName()}}
+                    </button>
                 </span>
             </div>
         </div>

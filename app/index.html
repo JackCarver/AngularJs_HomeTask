@@ -14,9 +14,10 @@
             <h1>
                 <img class="photo" ng-src="{{$ctrl.todo.userPhoto}}">
                 {{::$ctrl.todo.user}}'s To Do List
-                <span class="label label-default"
-                     ng-hide="$ctrl.incompleteCount($ctrl.todo.items) === 0"
-                     ng-class="$ctrl.warningLevel($ctrl.todo.items)">
+                <span 
+                    class="label label-default"
+                    ng-hide="$ctrl.incompleteCount($ctrl.todo.items) === 0"
+                    ng-class="$ctrl.warningLevel($ctrl.todo.items)">
                     {{$ctrl.incompleteCount($ctrl.todo.items)}}
                 </span>
             </h1>
@@ -28,13 +29,18 @@
             <div class="panel-heading">
                 <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> To Do List
             </div>
-            <div class="panel-body">
-                
+            <div class="panel-body">                
                 <vi-task-list></vi-task-list>
-
                 <label>
                     <input type="checkbox" ng-model="$ctrl.showComplete" >Show Complete
                 </label>
+                <div ng-show="$ctrl.isHaveIncompleteItem($ctrl.todo.items)">
+                    <button
+                        class="btn btn-primary btn-danger glyphicon glyphicon-trash" 
+                        aria-hidden="true"                        
+                        ng-click="$ctrl.removeCompletedItem($ctrl.todo.items)"></button>
+                        <label>Remove all completed tasks</label>
+                </div>
             </div>
         </div>
     </div>
