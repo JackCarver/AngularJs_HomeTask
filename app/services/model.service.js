@@ -3,18 +3,11 @@
 
     angular.module('app')
         .value('model', {
-            "user": "Vitaliy",
-            "userPhoto": "images/VZ.jpg"//,
-            // "items": [
-            //     { "action": "Estimate...", "done": false },
-            //     { "action": "Create...", "done": false },
-            //     { "action": "Edit...", "done": true },
-            //     { "action": "Delete...", "done": false }
-            // ]
+            "user": "Andrei",
+            "userPhoto": "images/AU.jpg"
         });
 
     angular.module('app')
-        .value('isEditModeOn', false)
         .value('sortType', 'action')
         .value('sortReverse', false);
 

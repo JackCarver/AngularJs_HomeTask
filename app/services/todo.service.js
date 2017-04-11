@@ -4,61 +4,28 @@
     angular.module('app')
         .factory('todoService', todoService);
 
-    todoService.$inject = ['$http', '$q', 'isEditModeOn'];
-    function todoService($http, $q, isEditModeOn) {
+    todoService.$inject = ['$http', '$q'];
+    function todoService($http, $q) {
         return {
             addNewItem,
             getItems,
             incompleteCount,
-            isItemValid,
             warningLevel,
             removeItem,
             removeCompletedItem,
             isHaveIncompleteItem,
             checkStatus,
-            setEditItem,
-            SaveEditButtonName,
-            missedDeadline
+            missedDeadline,
+            changeItem
         };
 
-        function SaveEditButtonName() {
-            return isEditModeOn
-                ? "Save"
-                : "Add";
+        function changeItem(items, newItem, oldItem) {
+            removeItem(items, oldItem);
+            items.push(newItem);
         }
 
-        function addNewItem(items, newItem, tempEditItem) {
-            if(isEditModeOn ) {
-                removeItem(items, tempEditItem);
-                isEditModeOn = false;
-            }
-
-            if (isItemValid(newItem)) {
-                items.push({
-                   action: newItem.action,
-                   done: false,
-                   deadline: newItem.deadline,
-                   responsible: newItem.responsible,
-                   estimation: newItem.estimation
-                });
-
-                newItem.action = '';
-                newItem.deadline = '';
-                newItem.responsible = '';
-                newItem.estimation = '';
-            }
-        }
-
-        function setEditItem(item, $ctrl) {
-            $ctrl.newItem = {
-                    action: item.action,
-                    done: false,
-                    deadline: new Date(item.deadline),
-                    responsible: item.responsible,
-                    estimation: item.estimation
-            };
-            $ctrl.tempEditItem = item;
-            isEditModeOn = true;
+        function addNewItem(items, newItem) {
+            items.push(newItem);
         }
 
         function getItems() {
@@ -95,21 +62,14 @@
             return count;
         }
 
-        function isItemValid(newItem) {
-            return newItem 
-                && newItem.action 
-                && angular.isDate(newItem.deadline)
-                && newItem.responsible 
-                && angular.isNumber(newItem.estimation);
-        }
-
         function isHaveIncompleteItem(items) {
+           let isHave = false;
             if(items != undefined) {    // todo: may be we can remove it, but we will have error after page loaded
                 var count = items.length - incompleteCount(items);
-                return count > 0;
+                isHave = count > 0;
             }
 
-            return 0;            
+            return isHave;            
         }
 
         function warningLevel(items) {
@@ -129,7 +89,6 @@
                 item.done = isCheckAll;
             });
         }
-        
     }
 
 })();

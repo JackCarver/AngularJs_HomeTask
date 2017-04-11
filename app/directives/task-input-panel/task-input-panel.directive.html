@@ -36,15 +36,24 @@
                         class="form-control"
                         ng-model="$ctrl.newItem.estimation" />
                 </div>
-
-                <span class="input-group-btn">
-                    <button
-                        class="btn btn-primary"
-                        ng-click="$ctrl.addNewItem($ctrl.todo.items, $ctrl.newItem, $ctrl.tempEditItem)"
-                        ng-disabled="!($ctrl.isItemValid($ctrl.newItem))">
-                        {{$ctrl.SaveEditButtonName()}}
-                    </button>
-                </span>
+                     
+                <div>
+                    <span>
+                        <button
+                            class="btn btn-primary"
+                            ng-click="$ctrl.enter()"
+                            ng-disabled="!($ctrl.validateItem($ctrl.newItem))">
+                            {{$ctrl.buttonEnterName}}
+                        </button>
+                    </span>
+                    <span>
+                        <button
+                            class="btn btn-primary"
+                            ng-click="$ctrl.close()">
+                            Close
+                        </button>
+                    </span>
+                </div>
             </div>
         </div>
     </form>
